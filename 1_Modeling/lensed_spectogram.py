@@ -124,8 +124,8 @@ for i in progress(range(spec_counter,4000)):
     f.write('Distance from lens to source          = ' + str(D_ls*c/p)    + ' parsecs\n')
     f.write('Distance from observer to source      = ' + str(D_s*c/p)     + ' parsecs\n')
     f.write('Distance of source from line of sight = ' + str(eta*c/p)     + ' parsecs\n')
-    f.write('Redshift (z)                          = ' + str(z)       + '\n\n')
-    f.write('Time delay                            = ' + str(t_delay) + ' s\n\n\n')
+    f.write('Redshift(z)                           = ' + str(z)       + '\n\n')
+    f.write('Time delay                            = ' + str(t_delay) + ' s\n\n\n')":
    
     f.close()
     
