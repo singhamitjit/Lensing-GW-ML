@@ -10,11 +10,10 @@ import pycbc.psd
 import pylab
 
 fs = 1024
-spec_counter = 3050
+spec_counter = 0
 
-progress = progressbar.ProgressBar()
-
-for i in progress(range(spec_counter,4000)):
+for i in range(spec_counter,4000):
+    #Variables
     G    = 6.674*10**-11
     c    = 2.998*10**8
     p    = 3.086*10**16
@@ -31,7 +30,7 @@ for i in progress(range(spec_counter,4000)):
     zr   = np.linspace(0,2,100)
     z    = zr[random.randint(0,99)]
 
-    #Mass of black holes
+    #Mass of binaries
     mr = np.linspace(4,35,50)*SM*G/(c**3)
     M1 = mr[random.randint(0,49)]
     M2 = mr[random.randint(0,49)]
@@ -56,6 +55,8 @@ for i in progress(range(spec_counter,4000)):
     if t_delay>t_lower:
         print str(i+1) + ': Time delay too large'
         continue
+
+
     if 0.05>=y>=0.3:
         print 'y is out of range'
         continue
@@ -132,8 +133,10 @@ for i in progress(range(spec_counter,4000)):
     f.write('Distance from lens to source          = ' + str(D_ls*c/p)    + ' parsecs\n')
     f.write('Distance from observer to source      = ' + str(D_s*c/p)     + ' parsecs\n')
     f.write('Distance of source from line of sight = ' + str(eta*c/p)     + ' parsecs\n')
-    f.write('Redshift(z)                           = ' + str(z)       + '\n\n')
-    f.write('Time delay                            = ' + str(t_delay) + ' s\n\n\n')
-   
+    f.write('Redshift(z)                           = ' + str(z)           + '\n\n'      )
+    f.write('Time delay                            = ' + str(t_delay)     + ' s\n'      )
+    f.write('y                                     = ' + str(y)           + '\n  '      )
+    f.write('mu_plus                               = ' + str(mu_plus)     + '\n  '      )
+    f.write('mu_minus                              = ' + str(mu_minus)    + '\n  '      )
     f.close()
     
