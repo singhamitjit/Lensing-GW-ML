@@ -15,7 +15,7 @@ for i in progress(range(spec_counter,4000)):
     p    = 3.086*10**16
 
     SM   = 1.989*10**30
-    Mlz  = np.linspace(10, 10000000,10000)*SM*G/(c**3)
+    Mlz  = np.logspace(1, 7,10000)*SM*G/(c**3)
     M_lz = Mlz[random.randint(0,9999)]
     D    = np.linspace(10, 1000, 100)*(10**6)*p/c
     D_l  = D[random.randint(0,99)]
