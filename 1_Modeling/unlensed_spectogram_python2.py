@@ -7,7 +7,7 @@ import random
 import progressbar
 
 fs = 1024
-spec_counter = 3000
+spec_counter = 0
 
 progress = progressbar.ProgressBar()
 
@@ -97,7 +97,7 @@ for i in range(spec_counter,4000):
     plt.close()
     
     
-    f = open("home/amitjit/output/spectrograms/Unlensed/Unlensed_" + str(spec_counter) + ".txt", "w")
+    f = open("/home/amitjit/output/spectrograms/Unlensed/Unlensed_" + str(spec_counter) + ".txt", "w")
     
     f.write('Masses of merging black holes         = ' + str(M1*(c**3)/(SM*G))   + ' Solar Masses, ' + str(M2*(c**3)/(SM*G)) + ' Solar Masses\n\n')
     f.write('Distance from observer to source      = ' + str(D_s*c/p)     + ' parsecs\n')
