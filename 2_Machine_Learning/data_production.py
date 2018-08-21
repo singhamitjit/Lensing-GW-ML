@@ -2,6 +2,7 @@ import numpy as np
 import imageio
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+from multiprocessing import Pool
 
 #Number of samples of images of each class
 n_samples = int(500)
