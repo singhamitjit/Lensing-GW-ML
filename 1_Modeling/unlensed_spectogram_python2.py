@@ -6,6 +6,7 @@ import numpy as np
 import random
 from multiprocessing import Pool
 import pycbc.noise
+import pycbc.psd
 
 def multi(spec_count):
     fs = 1024
@@ -34,8 +35,8 @@ def multi(spec_count):
         #Gravitational Waveform
         def h(t, l=0):
             theta = n*(-t)/(5*M)
-            phi   = -(theta**(5/8))/n
-            x     = 0.25*(theta)**(-1/4)
+            phi   = -(theta**(5./8.))/n
+            x     = 0.25*(theta)**(-1./4.)
             return -8*np.sqrt(5/np.pi)*m*x*np.cos(phi+l)/(D_s)
         
         t_lower = 50
@@ -44,6 +45,16 @@ def multi(spec_count):
         h_unlensed = h(t_vals)
         
         spec_counter+= 1
+        
+        flow = 30.0
+        delta_f = 1.0/ 16
+        flen = int(2048/ delta_f)+1
+        psd =pycbc.psd.aLIGOZeroDetHighPower(flen, delta_f, flow)
+
+
+        delta_t  = 1.0/fs
+        tsamples = int(t_lower/delta_t)
+        n        = pycbc.noise.noise_from_psd(tsamples, delta_t, psd)
 
         for a in [-np.inf, np.inf, np.nan]:
             shift = 0
@@ -51,6 +62,7 @@ def multi(spec_count):
                 if value == a:
                     t_vals = np.delete(t_vals, index-shift)
                     h_unlensed = np.delete(h_unlensed, index-shift)
+                    n = np.delete(n, index-shift)
                     shift+=1
 
         abshlmin = abs(h_unlensed.min())
@@ -63,39 +75,38 @@ def multi(spec_count):
 
         h_unlensed = h_unlensed/normf
 
-#        def stft(s, fs):
-#          ''' stft computed using the short time fourier transform
-#              
-#              :param s: s(t)
-#              :param fs: Sampling rate
-#              :returns: (stft[complex], ff, t, im)
-#          '''
-#          # Spectral parameters
-#          NFFT = fs/8
-#          window = np.blackman(NFFT)
-#          noverlap = NFFT*15/16
-#          # Compute STFT
-#          stft, ff, tt = mlab.specgram(s, NFFT=int(NFFT), Fs=fs, window=window, noverlap=int(noverlap), mode='complex')
-#          return (stft, ff, tt)
-#
-#
-#      #  n        = np.random.normal(scale= (5.e-22/normf) , size=len(h_unlensed))
-#        signal   = h_unlensed#: + n # For simplicity
-#        stfti, ff, tt = stft(signal,fs)
-#
-#        def plotstft(s, t, f):
-#            plotted = np.abs(s)
-#            fig,ax=plt.subplots(1)
-#            fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
-#            mesh = ax.pcolormesh(t,f,plotted,cmap='gist_earth',shading='gouraud')
-#            ax.axis('tight')
-#            ax.axis('off')
-#         
-#        plotstft(stfti,tt,ff)
-#        plt.ylim([0,400])
-        plt.figure()
-        plt.plot(t_vals, h_unlensed)
-        plt.savefig("/home/amitjit/output/spectrograms/Unlensed/Unlensed_" + str(spec_counter), bbox_inches=0, pad_inches= 0, transparent= True, dpi=50)
+        def stft(s, fs):
+          ''' stft computed using the short time fourier transform
+              
+              :param s: s(t)
+              :param fs: Sampling rate
+              :returns: (stft[complex], ff, t, im)
+          '''
+          # Spectral parameters
+          NFFT = fs/8.
+          window = np.blackman(NFFT)
+          noverlap = NFFT*15./16.
+          # Compute STFT
+          stft, ff, tt = mlab.specgram(s, NFFT=int(NFFT), Fs=fs, window=window, noverlap=int(noverlap), mode='complex')
+          return (stft, ff, tt)
+        
+        
+        
+        
+        signal   =  h_unlensed + n/normf
+        stfti, ff, tt = stft(signal,fs)
+
+        def plotstft(s, t, f):
+            plotted = np.abs(s)
+            fig,ax=plt.subplots(1)
+            fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+            mesh = ax.pcolormesh(t,f,plotted,cmap='gist_earth',shading='gouraud')
+            ax.axis('tight')
+            ax.axis('off')
+         
+        plotstft(stfti,tt,ff)
+        plt.ylim([0,400])
+        plt.savefig("/home/amitjit/output/spectrograms/Unlensed/Unlensed_" + str(spec_counter), bbox_inches=0, pad_inches= 0, transparent= True, dpi=100)
         plt.close()
         
         
@@ -106,5 +117,5 @@ def multi(spec_count):
        
         f.close()
 
-pool = Pool(8)
-pool.map(multi, list(range(10)))
+pool = Pool(10)
+pool.map(multi, list(range(20)))
