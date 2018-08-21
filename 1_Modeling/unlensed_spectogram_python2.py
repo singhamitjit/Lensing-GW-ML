@@ -63,36 +63,38 @@ def multi(spec_count):
 
         h_unlensed = h_unlensed/normf
 
-        def stft(s, fs):
-          ''' stft computed using the short time fourier transform
-              
-              :param s: s(t)
-              :param fs: Sampling rate
-              :returns: (stft[complex], ff, t, im)
-          '''
-          # Spectral parameters
-          NFFT = fs/8
-          window = np.blackman(NFFT)
-          noverlap = NFFT*15/16
-          # Compute STFT
-          stft, ff, tt = mlab.specgram(s, NFFT=int(NFFT), Fs=fs, window=window, noverlap=int(noverlap), mode='complex')
-          return (stft, ff, tt)
-
-
-      #  n        = np.random.normal(scale= (5.e-22/normf) , size=len(h_unlensed))
-        signal   = h_unlensed#: + n # For simplicity
-        stfti, ff, tt = stft(signal,fs)
-
-        def plotstft(s, t, f):
-            plotted = np.abs(s)
-            fig,ax=plt.subplots(1)
-            fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
-            mesh = ax.pcolormesh(t,f,plotted,cmap='gist_earth',shading='gouraud')
-            ax.axis('tight')
-            ax.axis('off')
-         
-        plotstft(stfti,tt,ff)
-        plt.ylim([0,400])
+#        def stft(s, fs):
+#          ''' stft computed using the short time fourier transform
+#              
+#              :param s: s(t)
+#              :param fs: Sampling rate
+#              :returns: (stft[complex], ff, t, im)
+#          '''
+#          # Spectral parameters
+#          NFFT = fs/8
+#          window = np.blackman(NFFT)
+#          noverlap = NFFT*15/16
+#          # Compute STFT
+#          stft, ff, tt = mlab.specgram(s, NFFT=int(NFFT), Fs=fs, window=window, noverlap=int(noverlap), mode='complex')
+#          return (stft, ff, tt)
+#
+#
+#      #  n        = np.random.normal(scale= (5.e-22/normf) , size=len(h_unlensed))
+#        signal   = h_unlensed#: + n # For simplicity
+#        stfti, ff, tt = stft(signal,fs)
+#
+#        def plotstft(s, t, f):
+#            plotted = np.abs(s)
+#            fig,ax=plt.subplots(1)
+#            fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+#            mesh = ax.pcolormesh(t,f,plotted,cmap='gist_earth',shading='gouraud')
+#            ax.axis('tight')
+#            ax.axis('off')
+#         
+#        plotstft(stfti,tt,ff)
+#        plt.ylim([0,400])
+        plt.figure()
+        plt.plot(t_vals, h_unlensed)
         plt.savefig("/home/amitjit/output/spectrograms/Unlensed/Unlensed_" + str(spec_counter), bbox_inches=0, pad_inches= 0, transparent= True, dpi=50)
         plt.close()
         
