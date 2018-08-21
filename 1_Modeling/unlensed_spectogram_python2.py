@@ -5,6 +5,7 @@ from matplotlib.pyplot import mlab
 import numpy as np
 import random
 from multiprocessing import Pool
+import pycbc.noise
 
 def multi(spec_count):
     fs = 1024
@@ -103,5 +104,5 @@ def multi(spec_count):
        
         f.close()
 
-pool = Pool(10)
+pool = Pool(8)
 pool.map(multi, list(range(10)))
