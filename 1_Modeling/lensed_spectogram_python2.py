@@ -131,7 +131,7 @@ def multi(spec_count):
          
         plotstft(stfti,tt,ff)
         plt.ylim([0,400])
-        plt.savefig("/home/amitjit/output/spectrograms/PM/Lensed_" + str(spec_counter), bbox_inches=0, pad_inches= 0, transparent= True, dpi=100)
+        plt.savefig("/home/amitjit/output/spectrograms/PM/Lensed_" + str(spec_counter), bbox_inches=0, pad_inches= 0, transparent= True, dpi=50)
         plt.close()
         
         
