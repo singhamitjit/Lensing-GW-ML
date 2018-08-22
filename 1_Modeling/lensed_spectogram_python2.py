@@ -61,7 +61,7 @@ def multi(spec_count):
             print 'y is out of range'
             continue
 
-        spec_counter+= 1
+        spec_counter+=1
 
         mu_plus  = 0.5 + ((y**2 + 2)/(2*y*np.sqrt(y**2 + 4)))
         mu_minus = 0.5 - ((y**2 + 2)/(2*y*np.sqrt(y**2 + 4)))
