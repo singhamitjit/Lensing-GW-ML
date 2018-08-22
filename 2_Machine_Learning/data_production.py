@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from multiprocessing import Pool
 
 #Number of samples of images of each class
-n_samples = int(8000)
+n_samples = int(10000)
 
 
 #Import image data as arrays

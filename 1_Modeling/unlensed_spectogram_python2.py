@@ -10,7 +10,7 @@ import pycbc.psd
 
 def multi(spec_count):
     fs = 1024
-    spec_counter = spec_count*1000
+    spec_counter = spec_count*1000 + 0
 
     for i in range(spec_counter, spec_counter+1000):
         G    = 6.674*10**-11
@@ -95,6 +95,7 @@ def multi(spec_count):
         
         signal   =  h_unlensed + n/normf
         stfti, ff, tt = stft(signal,fs)
+        np.savez("/home/amitjit/output/spectrograms/Unlensed/Unlensed_" + str(spec_counter), stft=stfti, f=ff, t=tt)
 
         def plotstft(s, t, f):
             plotted = np.abs(s)
@@ -118,4 +119,4 @@ def multi(spec_count):
         f.close()
 
 pool = Pool(10)
-pool.map(multi, list(range(20)))
+pool.map(multi, list(range(10)))

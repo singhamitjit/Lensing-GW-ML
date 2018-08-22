@@ -10,7 +10,7 @@ import pycbc.psd
 
 def multi(spec_count):
     fs = 1024
-    spec_counter = spec_count*1000
+    spec_counter = spec_count*1000 + 0
 
     for i in range(spec_counter, spec_counter+1000):
         #Variables
@@ -120,6 +120,7 @@ def multi(spec_count):
         
         signal   = hl + n/normf
         stfti, ff, tt = stft(signal,fs)
+        np.savez("/home/amitjit/output/spectrograms/PM/Lensed_" + str(spec_counter), stft=stfti, f=ff, t=tt)
 
         def plotstft(s, t, f):
             plotted = np.abs(s)
@@ -134,7 +135,7 @@ def multi(spec_count):
         plt.savefig("/home/amitjit/output/spectrograms/PM/Lensed_" + str(spec_counter), bbox_inches=0, pad_inches= 0, transparent= True, dpi=50)
         plt.close()
         
-        
+         
         f = open("/home/amitjit/output/spectrograms/PM/Lensed_" + str(spec_counter) + ".txt", "w")
         
         f.write('Masses of merging black holes         = ' + str(M1*(c**3)/(SM*G))   + ' Solar Masses, ' + str(M2*(c**3)/(SM*G)) + ' Solar Masses\n\n')
@@ -152,4 +153,4 @@ def multi(spec_count):
         
 
 pool = Pool(10)
-pool.map(multi, list(range(20)))
+pool.map(multi, list(range(10)))
