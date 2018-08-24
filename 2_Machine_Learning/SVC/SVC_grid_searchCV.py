@@ -20,10 +20,11 @@ print('\nFinished importing data.')
 # 10 is often helpful. Using a basis of 2, a finer
 # tuning can be achieved but at a much higher cost.
 
-C_range = np.logspace(-3, 4, 5)
-gamma_range = np.logspace(-9, 3, 5)
+C_range = np.logspace(-2, 4, 4)
+gamma_range = np.logspace(-9, 3, 10)
 param_grid = dict(gamma=gamma_range, C=C_range)
-grid = GridSearchCV(SVC(probability=True), param_grid=param_grid, n_jobs=5, refit=True, return_train_score =True, verbose = 5)
+cv = StratifiedShuffleSplit(n_splits=3, test_size=0.2)
+grid = GridSearchCV(SVC(), param_grid=param_grid, n_jobs=1, refit=True, cv=cv, return_train_score =True, verbose = 2)
 grid.fit(X_train, y_train)
 
 joblib.dump(grid,"/home/amitjit/output/SVC_gridCV.pkl")
