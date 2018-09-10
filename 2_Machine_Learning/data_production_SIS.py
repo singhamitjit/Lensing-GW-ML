@@ -2,9 +2,6 @@ import numpy as np
 import imageio
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-import progressbar
-
-progress = progressbar.ProgressBar()
 
 #Number of samples of images of each class
 n_samples = int(4000)
