@@ -121,5 +121,5 @@ plt.xlabel('Time(s)')
 plt.axis('tight')
 plt.ylabel('Normalized Strain')
 # Add a relative path 
-plt.savefig('C:/Users/Amitjit/OneDrive - The Chinese University of Hong Kong/2018 Internship/Python/python/Final/Gravitational Waveforms (Normalised) 4',dpi=500)
+plt.savefig('C:/Users/Amitjit/OneDrive - The Chinese University of Hong Kong/2018 Internship/Python/python/Final/Gravitational Waveforms (Normalised) 4',dpi=500) # PDF file -- if possible
 plt.close()
