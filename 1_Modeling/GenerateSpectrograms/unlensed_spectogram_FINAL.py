@@ -54,15 +54,13 @@ def plotstft(s, t, f):
 ###########################
 samples = 1000              # Change number of samples and directory for saving files
 ###########################
-
-i = 0
-repeats = 0
 SNR_sums = []
 
-def multi(spec_count)
-    spec_counter = spec_count*100
-    
-    for i in range(spec counter, spec_counter+100):
+def multi(spec_count):
+    spec_counter = spec_count*samples/10
+    i = 0
+    repeats = 0
+    while i < samples/10:
         #Binary Parameters
         D    = np.linspace(10., 1000., 100)*(10**6)*p/c
         D_s  = D[random.randint(0, 99)]
@@ -181,10 +179,11 @@ def multi(spec_count)
         else:
             repeats += 1 #repeats process if SNR condition not satisfied
             
-    print('SNR average = %f' % np.average(SNR_sums))
-    print('samples = %g, times repeated = %g times' % (samples, repeats))
-    print('time = %s seconds' % (time.time() - startTime))
+        #print('SNR average = %f' % np.average(SNR_sums))
+        print('samples = %g, times repeated = %g times' % (samples, repeats))
+#print('time = %s seconds' % (time.time() - startTime))
 
+print('SNR average = %f' % np.average(SNR_sums))
 
 pool = Pool(10)
 pool.map(multi, list(range(10)))
