@@ -4,7 +4,8 @@ Created on Sat Sep 15 17:57:31 2018
 
 @author: Ivan
 """
-
+import matplotlib as mpl
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import mlab
 import numpy as np
@@ -51,7 +52,7 @@ def plotstft(s, t, f):
             
 
 ###########################
-samples = 100              # Change number of samples and directory for saving files
+samples = 1000              # Change number of samples and directory for saving files
 ###########################
 
 i = 0
@@ -163,11 +164,11 @@ while i < samples:
         plt.figure()
         plotstft(stfti,tt,ff)
         plt.ylim([0,400])
-        plt.savefig("C:\Users\Ivan\Desktop\Gravitational Lensing CUHK\Amit\Unlensed\Unlensed_" + str(spec_counter), bbox_inches=0, pad_inches= 0, transparent= True, dpi=50)
+        plt.savefig("/home/amitjit/output/spectrograms/Unlensed/Unlensed_" + str(spec_counter), bbox_inches=0, pad_inches= 0, transparent= True, dpi=50)
         plt.close()
         
         #Saving binary/lensing parameters in a txt file
-        f = open("C:\Users\Ivan\Desktop\Gravitational Lensing CUHK\Amit\Unlensed\Unlensed_" + str(spec_counter) + ".txt", "w")
+        f = open("/home/amitjit/output/spectrograms/Unlensed/Unlensed_" + str(spec_counter) + ".txt", "w")
         f.write('Masses of merging black holes         = ' + str(M1*(c**3)/(SM*G))   + ' Solar Masses, ' + str(M2*(c**3)/(SM*G)) + ' Solar Masses\n\n')
         f.write('Distance from observer to source      = ' + str(D_s*c/p)     + ' parsecs\n')
         f.write('SNR                                   = ' + str(SNR_sum))

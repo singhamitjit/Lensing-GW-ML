@@ -4,7 +4,8 @@ Created on Sat Sep 15 18:36:48 2018
 
 @author: Ivan
 """
-
+import matplotlib as mpl
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import mlab
 import numpy as np
