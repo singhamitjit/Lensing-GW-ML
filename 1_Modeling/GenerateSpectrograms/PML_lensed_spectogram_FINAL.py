@@ -57,7 +57,7 @@ def plotstft(s, t, f):
     ax.axis('off')
             
 ###########################
-samples = 100              # Change number of samples and directory for saving files
+samples = 1000              # Change number of samples and directory for saving files
 ###########################
 
 i = 0
@@ -196,11 +196,11 @@ while i < samples:
             plt.figure()
             plotstft(stfti,tt,ff)
             plt.ylim([0,400])
-            plt.savefig("C:\Users\Ivan\Desktop\Gravitational Lensing CUHK\Amit\PML_Lensed3\PML_Lensed_" + str(spec_counter), bbox_inches=0, pad_inches= 0, transparent= True, dpi=50)
+            plt.savefig("/home/amitjit/output/spectrograms/PM/Lensed_" + str(spec_counter), bbox_inches=0, pad_inches= 0, transparent= True, dpi=50)
             plt.close()
             
             #Saving binary/lensing parameters in a txt file
-            f = open("C:\Users\Ivan\Desktop\Gravitational Lensing CUHK\Amit\PML_Lensed3\PML_Lensed_" + str(spec_counter) + ".txt", "w")
+            f = open("/home/amitjit/output/spectrograms/PM/Lensed_" + str(spec_counter) + ".txt", "w")
             f.write('Masses of merging black holes         = ' + str(M1*(c**3)/(SM*G))   + ' Solar Masses, ' + str(M2*(c**3)/(SM*G)) + ' Solar Masses\n\n')
             f.write('Mass of lens                          = ' + str(M_lz*(c**3)/(SM*G))    + ' Solar Masses\n')
             f.write('Distance from lens to observer        = ' + str(D_l*c/p)     + ' parsecs\n')
@@ -208,7 +208,10 @@ while i < samples:
             f.write('Distance from observer to source      = ' + str(D_s*c/p)     + ' parsecs\n')
             f.write('Distance of source from line of sight = ' + str(eta*c/p)     + ' parsecs\n')
             f.write('Redshift (z)                          = ' + str(z)       + '\n\n')
-            f.write('Time delay                            = ' + str(t_delay) + ' s\n\n\n')
+            f.write('Time delay                            = ' + str(t_delay) + ' s\n')
+            f.write('y                                     = ' + str(y)       + '\n')
+            f.write('mu_plus                               = ' + str(mu_plus) + '\n')
+            f.write('mu_minus                              = ' + str(mu_minus) + '\n\n')
             f.write('SNR                                   = ' + str(SNR_sum))
             f.close()
             
