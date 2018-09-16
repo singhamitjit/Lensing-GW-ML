@@ -4,7 +4,7 @@ from sklearn.externals import joblib
 
 
 
-data = np.load('/home/amitjit/output/data_PM_1000.npz')
+data = np.load('/home/amitjit/output/data_SIS_1000.npz')
 X_train, y_train = data['X_train'], data['y_train']
 print('\nFinished importing data.')
 
@@ -15,7 +15,7 @@ print('Performing fitting')
 clf.fit(X_train, y_train)
 
 print('Saving clf')
-joblib.dump(clf, '/home/amitjit/output/SVC_1000.pkl' )
+joblib.dump(clf, '/home/amitjit/output/SVC_SIS_1000.pkl' )
 
 
 
