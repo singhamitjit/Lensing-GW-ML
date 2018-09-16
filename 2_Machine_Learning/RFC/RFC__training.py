@@ -17,9 +17,3 @@ print('Saving clf')
 joblib.dump(clf, 'C:/Users/Amitjit/OneDrive - The Chinese University of Hong Kong/2018 Internship/Python/python/Final/RFC/RFC.pkl' )
 
 
-
-#Completion sound
-import winsound
-duration = 900  # millisecond
-freq = 850  # Hz
-winsound.Beep(freq, duration)
