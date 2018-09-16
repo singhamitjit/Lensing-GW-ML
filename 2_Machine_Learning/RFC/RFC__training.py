@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.externals import joblib
 
 
-data = np.load('C:/Users/Amitjit/OneDrive - The Chinese University of Hong Kong/2018 Internship/Python/python/Final/data.npz')
+data = np.load('/home/amitjit/output/data_PM_1000.npz')
 X_train, y_train = data['X_train'], data['y_train']
 print('\nFinished importing data.')
 

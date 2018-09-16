@@ -26,7 +26,7 @@ alpha_range = np.logspace(-3, 4, 10)
 layer_size = [x for x in itertools.product((10,100,1000,10000,100000), repeat=1)]
 param_grid = dict(hidden_layer_sizes=layer_size, alpha = alpha_range)
 cv = StratifiedShuffleSplit(n_splits=2, test_size=0.2)
-grid = GridSearchCV(MLPClassifier(verbose=True), param_grid=param_grid, n_jobs=3,cv=cv, verbose = 1)
+grid = GridSearchCV(MLPClassifier(verbose=True), param_grid=param_grid, n_jobs=4,cv=cv, verbose = 4)
 grid.fit(X_train, y_train)
 
 
