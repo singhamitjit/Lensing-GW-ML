@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from multiprocessing import Pool
 
 #Number of samples of images of each class
-n_samples = int(5000)
+n_samples = int(1000)
 
 
 #Import image data as arrays
@@ -48,5 +48,5 @@ y_test  = np.concatenate((lensed_labels_test, unlensed_labels_test))
 rank_test = np.concatenate((lensed_rank_test, unlensed_rank_test))
 
 
-np.savez('/home/amitjit/output/data_PM', X_train = X_train, X_test = X_test, y_test = y_test, y_train = y_train, rank_test = rank_test)
+np.savez('/home/amitjit/output/data_PM_1000', X_train = X_train, X_test = X_test, y_test = y_test, y_train = y_train, rank_test = rank_test)
 

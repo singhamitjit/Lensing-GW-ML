@@ -1,9 +1,11 @@
 import numpy as np
-from sklearn.svm import SVC
+from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.model_selection import GridSearchCV
 from sklearn.externals import joblib
 import pandas as pd
+import itertools
+
 # #############################################################################
 # Load and prepare data set
 #
@@ -20,17 +22,17 @@ print('\nFinished importing data.')
 # 10 is often helpful. Using a basis of 2, a finer
 # tuning can be achieved but at a much higher cost.
 
-C_range = np.logspace(-2, 4, 4)
-gamma_range = np.logspace(-9, 3, 10)
-param_grid = dict(gamma=gamma_range, C=C_range)
-cv = StratifiedShuffleSplit(n_splits=3, test_size=0.2)
-grid = GridSearchCV(SVC(), param_grid=param_grid, n_jobs=5, refit=True, cv=cv, return_train_score =True, verbose = 2)
+alpha_range = np.logspace(-3, 4, 10)
+layer_size = [x for x in itertools.product((10,100,1000,10000,100000), repeat=1)]
+param_grid = dict(hidden_layer_sizes=layer_size, alpha = alpha_range)
+cv = StratifiedShuffleSplit(n_splits=2, test_size=0.2)
+grid = GridSearchCV(MLPClassifier(verbose=True), param_grid=param_grid, n_jobs=4,cv=cv, verbose = 2)
 grid.fit(X_train, y_train)
 
-joblib.dump(grid,"/home/amitjit/output/SVC_gridCV.pkl")
+joblib.dump(grid,"/home/amitjit/output/MLP_gridCV.pkl")
 
-f = open("/home/amitjit/output/SVC_gridCV.txt","w")
-f.write("The best parameters are %s with a score of %0.2f"
+f = open("/home/amitjit/output/MLP_gridCV.txt","w")
+f.write("The best parameters are %s with a score of %0.2f \n "
       % (grid.best_params_, grid.best_score_))
 f.write(pd.DataFrame(data=grid.cv_results_))
 f.close()
