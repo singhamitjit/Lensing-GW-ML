@@ -234,23 +234,23 @@ fpr_mlp, tpr_mlp, thresholds_mlp = roc_curve(y_test, y_prob_mlp[:, 1], pos_label
 '''
 x = np.linspace(0,1,1000)
 
-'''
+
 plt.plot(tpr_svc, fpr_svc, linewidth=2, label='SVC')
 plt.plot(tpr_rfc, fpr_rfc, linewidth=2, label='Random Forest')
 #plt.plot(tpr_mlp, fpr_mlp, linewidth=2, label='MLP')
-plt.plot(x, x, 'k--')
+plt.plot(x, x, 'k--', label = 'Line of No Discrimination')
 plt.axis([0, 1, 0, 1])
 plt.title('Receiver Operating Characteristic Curve')
 plt.legend()
 plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
-plt.savefig('C:/Users/Amitjit/OneDrive - The Chinese University of Hong Kong/2018 Internship/Python/python/Final/ROC curve.png',dpi=500)
+plt.savefig('/home/amitjit/output/Final/ROC_curve_1000.pdf', bbox_tight=True)
 plt.close()
-'''
+
 
 plt.semilogx(tpr_svc, fpr_svc, linewidth=2, label='SVC')
 plt.semilogx(tpr_rfc, fpr_rfc, linewidth=2, label='Random Forest')
-plt.semilogx(x, x, 'k--')
+plt.semilogx(x, x, 'k--', label = 'Line of No Disciminiation')
 #plt.plot(tpr_mlp, fpr_mlp, linewidth=2, label='MLP')
 plt.legend()
 plt.title('Logarithmic Receiver Operating Characteristic Curve')

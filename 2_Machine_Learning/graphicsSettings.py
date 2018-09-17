@@ -20,16 +20,14 @@ fig_width = fig_width_pt*inches_per_pt  # width in inches
 fig_height = fig_width*golden_mean      # height in inches
 fig_size =  [fig_width,fig_height]
 
-params = {'axes.labelsize': 10,
-          'font.family': 'serif',
-          'font.serif': 'Computer Modern Raman',
-          'font.size': 10,
-          'legend.fontsize': 28,
-          'xtick.labelsize': 32,
-          'ytick.labelsize': 32,
-          'axes.grid' : True,
+params = {'axes.labelsize': 20,
+          'font.family': 'garamond',
+          'font.size': 20,
+          'legend.fontsize': 20,
+          'xtick.labelsize': 20,
+          'ytick.labelsize': 20,
+          'axes.grid' : False ,
           'text.usetex': True,
-          'savefig.dpi' : 100,
           'lines.markersize' : 14, 
           'axes.formatter.useoffset': False,
           'figure.figsize': fig_size}
