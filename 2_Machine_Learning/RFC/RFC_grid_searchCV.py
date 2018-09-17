@@ -22,11 +22,10 @@ print('\nFinished importing data.')
 
 n_est_range = np.linspace(1, 10000, 41, dtype = int)
 nsl_range   = np.linspace(1, 100, 21, dtype = int)
-depth_range = [   1,   50,  100,  150,  200,  250,  300,  350,  400,  450,  500,
-                550,  600,  650,  700,  750,  800,  850,  900,  950, 1000, None]
+depth_range = [   1,   50,  100,  150,  200,  250,  300,  350,  400,  450,  500, 550,  600,  650,  700,  750,  800,  850,  900,  950, 1000, None]
 param_grid = dict(n_estimators = n_est_range, min_sample_split=nsl_range, max_depth=depth_range)
 cv = StratifiedShuffleSplit(n_splits=3, test_size=0.2)
-grid = GridSearchCV(RandomForestClassifier(n_jobs=5, verbose=1), param_grid=param_grid, n_jobs=2, refit=True, cv=cv, return_train_score =True, verbose = 2)
+grid = GridSearchCV(RandomForestClassifier(n_jobs=2, verbose=1), param_grid=param_grid, n_jobs=2, refit=True, cv=cv, return_train_score =True, verbose = 2)
 grid.fit(X_train, y_train)
 
 joblib.dump(grid,"/home/amitjit/output/RFC_gridCV.pkl")
