@@ -175,10 +175,10 @@ mc_rfc.close()
 
 
 
-'''
+
 #Performing mlp classification
 print('importing MLC Classificiation')
-mlp = joblib.load('/home/amitjit/output/MLP_SIS_1000.pkl')
+mlp = joblib.load('/home/amitjit/output/MLP_SIS_1000')
 print('Performing RFC Classificiation')
 predicted_mlp = mlp.predict(X_test)
 
@@ -214,7 +214,7 @@ for i, label in enumerate(y_test[predicted_mlp != y_test]):
         
 mc_mlp.close()
 
-'''
+
 
 #ROC Curve
 
@@ -226,18 +226,18 @@ fpr_svc, tpr_svc, thresholds_svc = roc_curve(y_test, y_prob_svc[:, 1], pos_label
 y_prob_rfc = rfc.predict_proba(X_test)
 
 fpr_rfc, tpr_rfc, thresholds_rfc = roc_curve(y_test, y_prob_rfc[:, 1], pos_label = 'Lensed Wave')
-'''
+
 y_prob_mlp = mlp.predict_proba(X_test)
 
 fpr_mlp, tpr_mlp, thresholds_mlp = roc_curve(y_test, y_prob_mlp[:, 1], pos_label = 'Lensed Wave')
 
-'''
+
 x = np.linspace(0,1,1000)
 
 
 plt.plot(tpr_svc, fpr_svc, linewidth=2, label='SVC')
-plt.plot(tpr_rfc, fpr_rfc, linewidth=2, label='Random Forest')
-#plt.plot(tpr_mlp, fpr_mlp, linewidth=2, label='MLP')
+plt.plot(tpr_rfc, fpr_rfc, linewidth=2, label='RFC')
+plt.plot(tpr_mlp, fpr_mlp, linewidth=2, label='MLP')
 plt.plot(x, x, 'k--', label= 'Line of No Discrimination')
 plt.axis([0, 1, 0, 1])
 plt.title('Receiver Operating Characteristic Curve')
@@ -249,9 +249,9 @@ plt.close()
 
 
 plt.semilogx(tpr_svc, fpr_svc, linewidth=2, label='SVC')
-plt.semilogx(tpr_rfc, fpr_rfc, linewidth=2, label='Random Forest')
+plt.semilogx(tpr_rfc, fpr_rfc, linewidth=2, label='RFC')
 plt.semilogx(x, x, 'k--', label = "Line of No Discrimination")
-#plt.plot(tpr_mlp, fpr_mlp, linewidth=2, label='MLP')
+plt.plot(tpr_mlp, fpr_mlp, linewidth=2, label='MLP')
 plt.legend()
 plt.title('Logarithmic Receiver Operating Characteristic Curve')
 plt.xlabel('False Positive Rate')

@@ -5,9 +5,9 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.externals import joblib
 import pandas as pd
 
-grid = joblib.load("/home/amitjit/output/SVC_gridCV.pkl")
+grid = joblib.load("/home/amitjit/output/MLP_gridCV.pkl")
 
-f = open("/home/amitjit/output/SVC_gridCV.txt","w")
+f = open("/home/amitjit/output/MLP_gridCV.txt","w")
 f.write("The best parameters are %s with a score of %0.2f"
       % (grid.best_params_, grid.best_score_))
 f.write(pd.DataFrame.to_string(pd.DataFrame(data=grid.cv_results_)))

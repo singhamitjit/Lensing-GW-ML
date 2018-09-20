@@ -22,18 +22,18 @@ print('\nFinished importing data.')
 # 10 is often helpful. Using a basis of 2, a finer
 # tuning can be achieved but at a much higher cost.
 
-alpha_range = np.logspace(-3, 2, 8)
-layer_size = [x for x in itertools.product((10,100,1000), repeat=1)]
+alpha_range = np.logspace(-3, 0, 4)
+layer_size = [x for x in itertools.product((10000, 100000), repeat=1)]
 param_grid = dict(hidden_layer_sizes=layer_size, alpha = alpha_range)
 cv = StratifiedShuffleSplit(n_splits=2, test_size=0.2)
 grid = GridSearchCV(MLPClassifier(verbose=True), param_grid=param_grid, n_jobs=5,cv=cv, verbose = 4)
 grid.fit(X_train, y_train)
 
 
-joblib.dump(grid,"/home/amitjit/output/MLP_gridCV.pkl")
+joblib.dump(grid,"/home/amitjit/output/MLP_gridCV2.pkl")
 
 f = open("/home/amitjit/output/MLP_gridCV.txt","w")
-f.write("The best parameters are %s with a score of %0.2f \n "
+f.write("The best parameters are %s with a score of %0.2f \n\n "
       % (grid.best_params_, grid.best_score_))
-f.write(pd.DataFrame(data=grid.cv_results_))
+f.write(str(pd.DataFrame(data=grid.cv_results_)))
 f.close()
